@@ -408,12 +408,12 @@ function extract_zip($zip_File,$folder){
  * @return (bool)
  */
 function create_db($user,$pass,$server,$db_name){
-  $link = mysql_connect($server, $user, $pass);
+  $link = mysqli_connect($server, $user, $pass);
   if (!$link) {
-    die('Could not connect: ' . mysql_error());
+    die('Could not connect: ' . mysqli_error());
   }
   $sql = 'CREATE DATABASE IF NOT EXISTS '.$db_name;
-  if (mysql_query($sql, $link)) {
+  if (mysqli_query($sql, $link)) {
     return true;
   } else {
     return false;
@@ -430,7 +430,7 @@ function create_db($user,$pass,$server,$db_name){
  * @return (string)
  */
 function Get_latest_version_url($local = "en_US"){
-  $url =  'http://api.wordpress.org/core/version-check/1.6/?locale='.$local;
+  $url =  'http://api.wordpress.org/core/version-check/1.7/?locale='.$local;
   $c = curl_init($url);
   curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
   $page = curl_exec($c);
